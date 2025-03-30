@@ -128,3 +128,46 @@ USE gestao_operadoras;
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES
         (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+-- Queries analíticas
+    /* Quais as 10 operadoras com maiores despesas em 
+    "EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR"
+    no último trimestre? */
+        SELECT 
+            o.Razao_Social,
+            o.Modalidade,
+            o.UF,
+            SUM(d.VL_SALDO_FINAL) AS total_despesas_anual,
+            ROUND(SUM(d.VL_SALDO_FINAL) / 1000000, 2) AS total_milhoes
+        FROM 
+            Demonstracoes_Contabeis d
+        JOIN 
+            Operadoras_Ativas_na_ANS o ON d.REG_ANS = o.Registro_ANS
+        WHERE 
+            d.DESCRICAO LIKE '%EVENTOS/%SINISTROS%MEDICO HOSPITALAR%'
+            AND d.DATA BETWEEN '2024-10-01' AND '2024-12-31'
+        GROUP BY 
+            o.Razao_Social, o.Modalidade, o.UF
+        ORDER BY 
+            total_despesas_anual DESC
+        LIMIT 10;
+
+    /* Quais as 10 operadoras com maiores despesas nessa categoria no último ano? */
+        SELECT 
+            o.Razao_Social,
+            o.Modalidade,
+            o.UF,
+            SUM(d.VL_SALDO_FINAL) AS total_despesas_anual,
+            ROUND(SUM(d.VL_SALDO_FINAL) / 1000000, 2) AS total_milhoes
+        FROM 
+            Demonstracoes_Contabeis d
+        JOIN 
+            Operadoras_Ativas_na_ANS o ON d.REG_ANS = o.Registro_ANS
+        WHERE 
+            d.DATA BETWEEN '2024-01-01' AND '2024-12-31'
+            AND d.DESCRICAO LIKE '%EVENTOS/%SINISTROS%MEDICO HOSPITALAR%' 
+        GROUP BY 
+            o.Razao_Social, o.Modalidade, o.UF
+        ORDER BY 
+            total_despesas_anual DESC
+        LIMIT 10;
