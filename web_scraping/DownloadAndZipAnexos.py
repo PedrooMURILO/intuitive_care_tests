@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import os
+import zipfile
 
 url = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos"
 
@@ -29,5 +30,15 @@ if response.status_code == 200:
             downloaded_files.append(file_path)
         else:
             print(f"Erro ao baixar: {link}")
+            
+    if downloaded_files:
+        zip_file = "anexos_compactados.zip"
+        with zipfile.ZipFile(zip_file, 'w') as zipf:
+            for file in downloaded_files:
+                zipf.write(file, os.path.basename(file))
+                print(f"Arquivo {file} adicionado ao ZIP.")
+        print(f"Arquivos compactados em: {zip_file}")
+    else:
+        print("Nenhum arquivo foi baixado, portanto, não foi possível criar o ZIP.")
 else:
     print("Erro ao acessar o site.")
