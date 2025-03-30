@@ -46,3 +46,85 @@ USE gestao_operadoras;
         INDEX idx_reg_ans (REG_ANS),
         INDEX idx_conta_contabil (CD_CONTA_CONTABIL)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Queries para importar dados
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/Relatorio_cadop.csv' -- AJUSTAR
+    INTO TABLE operadoras_ativas_na_ans
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';'
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (Registro_ANS, CNPJ, Razao_Social, Nome_Fantasia, Modalidade, Logradouro, Numero, Complemento, Bairro, Cidade, UF, CEP, DDD, Telefone, Fax, Endereco_eletronico, Representante, Cargo_Representante, Regiao_de_Comercializacao, Data_Registro_ANS) 
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/1T2023.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/1T2024.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/2t2023.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/2T2024.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/3T2023.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/3T2024.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/4T2023.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+
+    LOAD DATA INFILE 'C:/xampp/IntuitiveCare/4T2024.csv' -- AJUSTAR
+    INTO TABLE demonstracoes_contabeis
+    CHARACTER SET utf8mb4
+    FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+        (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
