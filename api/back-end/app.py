@@ -25,7 +25,15 @@ def buscar_operadoras(query):
     
     return resultados
 
-print(buscar_operadoras("administradora")[0])
+@app.route('/buscar', methods=['GET'])
+def buscar():
+    query = request.args.get('query', '')
+    
+    if query:
+        resultados = buscar_operadoras(query)
+        return jsonify(resultados)
+    
+    return jsonify({"error": "Query não fornecida"}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
